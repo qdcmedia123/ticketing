@@ -1,0 +1,27 @@
+// Login
+gcloud auth login 
+
+// Above is not enough you must run this command as well 
+ gcloud auth application-default login
+
+// Google Cloud SDK Setup
+https://cloud.google.com/sdk/docs/install
+
+// Seup ingress-nginx on out google cloud cluster 
+// Kubernetes.github.io/ingress-nginx 
+
+//https://kubernetes.github.io/ingress-nginx/deploy/
+
+// You should be able to see the your cluster in docker local machine 
+// When you click to the context 
+
+gcloud container clusters get-credentials ticketing-dev
+
+// Update the host file with the next load balancing ip address 
+Update our host file again to poing to the remote cluster 
+
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
+
+Restart Skaffold
+

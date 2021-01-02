@@ -1,0 +1,26 @@
+tsc --init
+
+minikue kubectl = mk 
+k = kubectl 
+// Remembe always in minikube kubctl put to put -- before any command you use in kubectl 
+k create secret generic jwt-secret --from-literal=JWT_KEY=asdf
+mk create secret generic jwt-secret -- --from-literal=JWT_KEY=asdf
+mk get secrets
+mk get namespace
+
+# login to the pod
+mk or kubctl exec -it [name_of_pod] sh
+
+
+npm version patch
+npm publish --access public
+# Initialize typescript configuration file
+tsc --ini
+
+# Expose your pods outside of the kubernets where you 
+# Can access from localhost
+mk/kubectl port-forward nats-depl-65766d54dc-gw6fh 4222:4222
+
+# Nats monitoring tools 
+http://localhost:8222/streaming
+http://localhost:8222/streaming/channelsz?subs=1
