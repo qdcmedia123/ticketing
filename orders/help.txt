@@ -1,0 +1,6 @@
+DUPLICATE THE ticket service 
+Install dependencies 
+Build an image out of the orders service
+Create a Kubernetes deployment file 
+Set up file sync option in the skaffold.yaml file 
+Set up routing rules in the ingress service

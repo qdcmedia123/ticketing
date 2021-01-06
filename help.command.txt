@@ -1,5 +1,7 @@
 tsc --init
 
+minikube addons enable ingress
+minikube start --vm-driver=hyperkit
 minikue kubectl = mk 
 k = kubectl 
 // Remembe always in minikube kubctl put to put -- before any command you use in kubectl 
