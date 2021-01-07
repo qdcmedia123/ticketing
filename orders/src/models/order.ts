@@ -2,6 +2,8 @@ import mongoose, { Model } from 'mongoose';
 import {OrderStatus} from '@wealthface/common';
 import {TicketDoc} from '../models/ticket';
 
+export {OrderStatus};
+
 interface OrderAtters {
     userId: string;
     status: OrderStatus;
