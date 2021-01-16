@@ -26,3 +26,7 @@ mk/kubectl port-forward nats-depl-65766d54dc-gw6fh 4222:4222
 # Nats monitoring tools 
 http://localhost:8222/streaming
 http://localhost:8222/streaming/channelsz?subs=1
+
+
+#login to mongo directly 
+kubectl exec -it orders-mongo-depl-6bdb6cd94-hrfg4 mongo

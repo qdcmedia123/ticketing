@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import {Order, OrderStatus} from './order';
 import {updateIfCurrentPlugin} from 'mongoose-update-if-current';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 interface TicketAttrs {
     id: string;
@@ -19,7 +20,7 @@ export interface TicketDoc extends mongoose.Document {
 // Create model 
 interface TicketModel extends mongoose.Model<TicketDoc> {
     build(attrs: TicketAttrs): TicketDoc;
-    findByEvent(event: {id:string, version:number}):Promise<TicketDoc | null>;
+    findByEvent(event:{id:string, version: number}):Promise<TicketDoc | void>;
 }
 
 // Creat sheman 
@@ -48,8 +49,19 @@ const ticketSchema = new mongoose.Schema({
 ticketSchema.set('versionKey', 'version');
 
 ticketSchema.plugin(updateIfCurrentPlugin);
-ticketSchema.statics.findByEvent = (event: {id: string, version:number}) => {
-    return Ticket.findOne({
+// Before we are saving the data 
+// Find the record with version -1
+// If you dont want to use above plugin updateIfCurrentPlugin 
+// Then uncomment below code and comment updateIfCurrentPlugin code 
+// ticketSchema.pre('save', function(done) {
+//     // @ts-ignore
+//     this.$where = {
+//         version: this.get('version') - 1
+//     }
+//     done();
+// })
+ticketSchema.statics.findByEvent = (event:{id:string, version: number}) => {
+    return  Ticket.findOne({
         _id: event.id,
         version: event.version - 1
     });
