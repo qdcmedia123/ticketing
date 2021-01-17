@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import {Order, OrderStatus} from './order';
 import {updateIfCurrentPlugin} from 'mongoose-update-if-current';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 interface TicketAttrs {
     id: string;

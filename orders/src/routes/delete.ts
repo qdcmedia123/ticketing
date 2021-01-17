@@ -35,6 +35,7 @@ router.delete(
     // throw not authorized error
     // Publish the event by saying this order has been cancelled
     new OrderCancelledPublisher(natsWrapper.client).publish({
+      version: order.version,
       id: order.id,
       ticket: {
         id: order.ticket.id
