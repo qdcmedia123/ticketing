@@ -1,33 +1,34 @@
-import {Listener, OrderCancelledEvent, Subjects} from '@wealthface/common';
-import {queueGroupName} from './queue-group-name';
-import {Message} from 'node-nats-streaming';
+import {Listener, OrderCancelledEvent, Subjects } from '@wealthface/common'
 import {Ticket} from '../../models/ticket';
+import {Message} from 'node-nats-streaming';
+import {queueGroupName} from './queue-group-name';
 import {TicketUpdatedPublisher} from '../publishers/ticket-updated-publisher';
 export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
     subject: Subjects.OrderCancelled = Subjects.OrderCancelled;
     queueGroupName = queueGroupName;
     async onMessage(data: OrderCancelledEvent['data'], msg: Message) {
+        // Find the ticket 
         const ticket = await Ticket.findById(data.ticket.id);
 
-        // If ticket not ofund 
+        // Throw error if ticket not found 
         if(!ticket) {
             throw new Error('Ticket not found');
         }
 
-        // Created the event 
+        // Lets updated the ticket model 
         ticket.set({orderId: undefined});
-
-        // Save the ticket 
         await ticket.save();
 
-        // Publish the event 
+        // Again publish that ticket is updated 
         await new TicketUpdatedPublisher(this.client).publish({
             id: ticket.id,
-            orderId: ticket.orderId,
             version: ticket.version,
+            userId:ticket.userId,
             price: ticket.price,
             title: ticket.title,
-            userId: ticket.userId
         });
+
+        msg.ack();
+
     }
 }
