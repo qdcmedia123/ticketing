@@ -14,7 +14,7 @@ import {natsWrapper} from '../nats-wrapper';
 import {OrderCreatedPublisher} from '../events/publishers/order-created-publisher'
 
 const router = express.Router();
-const EXPIRATION_WINDOW_SECOUND = 15 * 60;
+const EXPIRATION_WINDOW_SECOUND = 1 * 60;
 
 
 
