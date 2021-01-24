@@ -2,7 +2,6 @@ import mongoose, { Model } from 'mongoose';
 import {OrderStatus} from '@wealthface/common';
 import {TicketDoc} from '../models/ticket';
 import {updateIfCurrentPlugin} from 'mongoose-update-if-current';
-import { updateTypePredicateNodeWithModifier } from 'typescript';
 
 export {OrderStatus};
 
