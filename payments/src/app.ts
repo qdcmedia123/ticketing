@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-
+import {createChargeRouter} from './routes/index';
 
 import {errorHandler, NotFoundError, currentUser
 } from '@wealthface/common';
@@ -15,11 +15,13 @@ app.use(cookieSession({
 }));
 app.use(currentUser);
 
+app.use(createChargeRouter);
 // This get must be fore errorHandler otherwise it will not work 
-app.all('*', async(req,res,next) => {
+app.all('*', async(req,res) => {
     throw new NotFoundError();
 })
 
 app.use(errorHandler);
+
 
 export {app};

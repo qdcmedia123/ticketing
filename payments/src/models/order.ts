@@ -1,65 +1,62 @@
-import mongoose, { mongo } from "mongoose";
-import { OrderStatus } from "@wealthface/common";
-import { updateIfCurrentPlugin } from "mongoose-update-if-current";
+import mongoose from 'mongoose';
+import {OrderStatus} from '@wealthface/common';
+import {updateIfCurrentPlugin} from 'mongoose-update-if-current';
 
-
-interface OrderAtters {
+interface OrderAttrs {
   id: string;
-  userId: string;
   version: number;
-  status: OrderStatus;
+  userId:string;
+  status:OrderStatus;
   price: number;
 }
 
+// Documents 
 interface OrderDoc extends mongoose.Document {
-
-  userId: string;
   version: number;
-  status: OrderStatus;
+  userId:string;
+  status:OrderStatus;
   price: number;
 }
 
+// Mongoose.model 
 interface OrderModel extends mongoose.Model<OrderDoc> {
-  build(attrs: OrderAtters): OrderDoc;
+  build(attrs:OrderAttrs):OrderDoc;
 }
 
-const orderSchema = new mongoose.Schema(
-  {
-    
-    userId: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
-    status: {
-        type: String,
-        required:true
-    }
+// Building Schema 
+const orderSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required:true,
   },
-  {
-    toJSON: {
-      transform(doc, ret) {
-        ret.id = ret._id;
-        delete ret._id;
-      },
-    },
+  price: {
+    type: Number,
+    required:true
+  },
+  status: {
+    type:String,
+    required:true
   }
-);
+
+}, {
+  toJSON: {
+    transform(doc, ret) {
+      ret.id = ret._id;
+      delete(ret._id)
+    }
+  }
+});
 
 orderSchema.set('versionKey', 'version');
 orderSchema.plugin(updateIfCurrentPlugin);
-orderSchema.statics.build = (attrs:OrderAtters) => {
-    return new Order({
-        _id: attrs.id,
-        version:attrs.version,
-        price:attrs.price,
-        userId: attrs.userId,
-        status: attrs.status
-    });
+orderSchema.statics.build = (attrs: OrderAttrs) => {
+  return new Order ({
+    _id: attrs.id,
+    version: attrs.version,
+    price: attrs.price,
+    userId: attrs.userId,
+    status: attrs.status
+  });
 }
-
-const Order = mongoose.model<OrderDoc, OrderModel>('Order', orderSchema);
+const Order = mongoose.model<OrderDoc, OrderModel>('Model', orderSchema);
 export {Order};
