@@ -11,7 +11,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     subject:Subjects.OrderCreated = Subjects.OrderCreated;
     queueGroupName = queueGroupName;
     async onMessage(data: OrderCreatedEvent['data'], msg:Message) {
-        
+        console.log('Payments received order created event')
         // Build the order 
         const order = Order.build({
             id: data.id,

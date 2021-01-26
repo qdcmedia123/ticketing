@@ -30,3 +30,8 @@ http://localhost:8222/streaming/channelsz?subs=1
 
 #login to mongo directly 
 kubectl exec -it orders-mongo-depl-6bdb6cd94-hrfg4 mongo
+
+
+# Create secret for stripe secure 
+kubectl create secret generic stripe-secret --from-literal STRIPE_KEY=sk_test_5FYrTQ3tapbq9wzxpp2KuQRN00eV8FnEKp
+

@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-import {createChargeRouter} from './routes/index';
+import {createChargeRouter} from './routes/new';
 
 import {errorHandler, NotFoundError, currentUser
 } from '@wealthface/common';
