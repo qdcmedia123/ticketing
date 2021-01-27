@@ -1,5 +1,7 @@
 import express, {Request ,Response} from 'express';
 import {body} from 'express-validator';
+import {PaymentCreatedPublisher} from '../events/publishers/payment-created-publisher';
+import {natsWrapper} from '../nats-wrapper';
 import {
     requireAuth,
     validateRequest,
@@ -11,6 +13,8 @@ import {
 
 import {Order} from '../models/order';
 import {stripe} from '../stripe';
+import {Payment} from '../models/payment';
+
 
 const router = express.Router();
 /* Remember to set this route to ingress nginx this router */
@@ -45,13 +49,26 @@ async (req: Request, res:Response) => {
         throw new BadRequestError('Can not pay for expired order');
     }
 
-    await stripe.charges.create({
+    const charge = await stripe.charges.create({
         currency: 'usd',
         amount: order.price * 100,
         source: token
     });
 
-    res.status(201).json({sucess:true})
+    // Build the payment 
+    const payment = Payment.build({
+        orderId,
+        stripeId: charge.id
+    });
+    // Save the payment 
+    await payment.save()
+    await new PaymentCreatedPublisher(natsWrapper.client).publish({
+        id: payment.id,
+        orderId: payment.orderId,
+        stripeId: payment.stripeId
+    });
+
+    res.status(201).json({id: payment.id})
 })
 
 export {router as createChargeRouter};

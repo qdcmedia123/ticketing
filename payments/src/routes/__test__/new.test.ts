@@ -4,8 +4,8 @@ import { app } from "../../app";
 import mongoose from "mongoose";
 import { OrderStatus } from "@wealthface/common";
 import {stripe} from '../../stripe';
-
 //jest.mock('../../stripe');
+import {Payment} from '../../models/payment';
 
 it("it returns 404 when request order does not exits", async () => {
   await request(app)
@@ -93,5 +93,14 @@ it('returns a 201 with valid input', async() => {
       return charge.amount === price * 100
     });
 
+
     expect(stipeCharge).toBeDefined();
+    expect(stipeCharge!.currency).toEqual('usd');
+
+    const payment = Payment.findOne({
+      orderId:order.id,
+      stripeId: stipeCharge!.id
+    });
+    expect(payment).not.toBeNull();
+
 })

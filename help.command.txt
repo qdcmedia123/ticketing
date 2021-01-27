@@ -35,3 +35,15 @@ kubectl exec -it orders-mongo-depl-6bdb6cd94-hrfg4 mongo
 # Create secret for stripe secure 
 kubectl create secret generic stripe-secret --from-literal STRIPE_KEY=sk_test_5FYrTQ3tapbq9wzxpp2KuQRN00eV8FnEKp
 
+
+
+#Your connection is not private remove this by typing 
+thisisunsafe
+
+kubectl get namespace
+
+'http://ingress-nginx-controller.kube-system.svc.cluster.local/api/users/currentuser',
+
+kubectl expose deployment ingress-nginx-controller --target-port=80 --type=NodePort -n kube-system
+
+kubectl get services -n kube-system
