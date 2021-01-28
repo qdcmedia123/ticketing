@@ -12,7 +12,7 @@ export default () => {
         email,
         password
       },
-      onSucess: () => Router.push('/')
+      onSuccess: () => Router.push('/')
   })
 
   const onSubmit = async event => {

@@ -1,15 +1,15 @@
 import axios from 'axios';
 import {useState} from 'react';
 
-const useRequest = ({url, method, body, onSucess}) => {
+const useRequest = ({url, method, body, onSuccess}) => {
     const [errors, setErrors] = useState(null);
 
     const doRequest = async() => {
         try {
           setErrors(null)
             const response = await axios[method](url, body);
-            if(onSucess) {
-               onSucess();
+            if(onSuccess) {
+               onSuccess(response.data);
             }
             return response.data;
         } catch (err) {
