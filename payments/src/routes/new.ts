@@ -44,17 +44,21 @@ async (req: Request, res:Response) => {
     if(order.userId !== req.currentUser!.id) {
         throw new NotAuthorizedError();
     }
+    console.log('this is from payment service');
+    console.log(order);
     // Order status must not be cancelled 
     if(order.status === OrderStatus.Cancelled) {
+        
         throw new BadRequestError('Can not pay for expired order');
     }
 
+    
     const charge = await stripe.charges.create({
         currency: 'usd',
         amount: order.price * 100,
         source: token
     });
-
+    console.log('starting charging')
     // Build the payment 
     const payment = Payment.build({
         orderId,
@@ -62,11 +66,16 @@ async (req: Request, res:Response) => {
     });
     // Save the payment 
     await payment.save()
-    await new PaymentCreatedPublisher(natsWrapper.client).publish({
-        id: payment.id,
-        orderId: payment.orderId,
-        stripeId: payment.stripeId
-    });
+    try {
+        await new PaymentCreatedPublisher(natsWrapper.client).publish({
+            id: payment.id,
+            orderId: payment.orderId,
+            stripeId: payment.stripeId
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    
 
     res.status(201).json({id: payment.id})
 })
