@@ -1,4 +1,6 @@
 #comment
+#https://github.com/google-github-actions/setup-gcloud
+#https://cloud.google.com/iam/docs/creating-managing-service-account-keys?authuser=1
 name: deploy-auth
 
 on:
