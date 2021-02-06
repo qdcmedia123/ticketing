@@ -31,6 +31,12 @@ http://localhost:8222/streaming/channelsz?subs=1
 #login to mongo directly 
 kubectl exec -it orders-mongo-depl-6bdb6cd94-hrfg4 mongo
 
+#get context 
+kubectl config get-contexts
+
+kubectl config delete-context Cluster_Name_1
+
+
 
 # Create secret for stripe secure 
 kubectl create secret generic stripe-secret --from-literal STRIPE_KEY=sk_test_5FYrTQ3tapbq9wzxpp2KuQRN00eV8FnEKp
@@ -47,3 +53,15 @@ kubectl get namespace
 kubectl expose deployment ingress-nginx-controller --target-port=80 --type=NodePort -n kube-system
 
 kubectl get services -n kube-system
+
+/*
+Run the following command to create the nginx-ingress-controller ingress controller deployment, along with the Kubernetes RBAC roles and bindings:
+*/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+
+
+// With my observation in google cloud the service should be  
+http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+// But in mace 
+http://ingress-nginx-controller.kube-system.svc.cluster.local
+
