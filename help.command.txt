@@ -65,3 +65,4 @@ http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 // But in mace 
 http://ingress-nginx-controller.kube-system.svc.cluster.local
 
+kubectl config use-context <context_name>
