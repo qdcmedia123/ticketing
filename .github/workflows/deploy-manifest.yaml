@@ -1,4 +1,5 @@
 #deployment
+#split infra directory
 name: deploy-manifest
 
 on:
