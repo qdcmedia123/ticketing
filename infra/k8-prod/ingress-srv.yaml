@@ -1,4 +1,5 @@
 # apiVersion: extensions/v1beta1 If you use google cloud not miinikube
+# this is how we are creating manifest file
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
