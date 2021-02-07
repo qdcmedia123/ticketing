@@ -1,0 +1,25 @@
+
+name: deploy-manifest
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'infra/**'
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          product_id: ${{secrets.GCP_PROJECT_ID}}
+          service_account_key: ${{ secrets.GCP_SA_KEY }} 
+          export_default_credentials : true
+      - name: User gcloud CLI
+        run: gcloud components install kubectl
+        run: kubectl apply -f infra/k8s
