@@ -1,4 +1,5 @@
 # apiVersion: extensions/v1beta1 If you use google cloud not miinikube
+# added - before -f
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

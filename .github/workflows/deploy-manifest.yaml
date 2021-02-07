@@ -20,4 +20,4 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }} 
           export_default_credentials : true
       - run: gcloud components install kubectl
-      - run: kubectl apply -f infra/k8s && kubectl apply infra/k8s-prod
+      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
