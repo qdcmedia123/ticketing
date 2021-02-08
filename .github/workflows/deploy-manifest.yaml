@@ -20,5 +20,5 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }} 
           export_default_credentials : true
       - run: gcloud components install kubectl
-      - run: gcloud container clusters get-credentials ticketing-dev --zone=ticketing-dev
+      - run: gcloud container clusters get-credentials ticketing-dev --zone=us-central1-c
       - run: gcloud info
