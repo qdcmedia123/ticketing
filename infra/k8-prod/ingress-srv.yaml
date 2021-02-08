@@ -1,5 +1,5 @@
 # apiVersion: extensions/v1beta1 If you use google cloud not miinikube
-# Use context is added
+# I have added new context gke_esub-287615_us-central1-c_ticketing-dev
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
