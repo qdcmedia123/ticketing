@@ -22,3 +22,5 @@ jobs:
       - run: gcloud components install kubectl
       - run: gcloud container clusters get-credentials ticketing-dev --zone=us-central1-c --project=esub-287615
       - run: kubectl config get-contexts
+      - run: kubectl config use-context gke_***_us-central1-c_ticketing-dev
+      - run: kubectl get pods
