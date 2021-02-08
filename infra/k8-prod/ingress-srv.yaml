@@ -1,5 +1,5 @@
 # apiVersion: extensions/v1beta1 If you use google cloud not miinikube
-# Project id is is added
+# I have added get context
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

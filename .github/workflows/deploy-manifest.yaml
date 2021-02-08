@@ -21,4 +21,4 @@ jobs:
           export_default_credentials : true
       - run: gcloud components install kubectl
       - run: gcloud container clusters get-credentials ticketing-dev --zone=us-central1-c --project=esub-287615
-      - run: gcloud info
+      - run: kubectl config get-contexts
