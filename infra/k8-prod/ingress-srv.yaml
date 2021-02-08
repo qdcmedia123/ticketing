@@ -1,5 +1,6 @@
 # apiVersion: extensions/v1beta1 If you use google cloud not miinikube
-#Now things has been removed
+# Now you need to add all the depl file in your workflow
+# for example workflow
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
