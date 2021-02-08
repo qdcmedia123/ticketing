@@ -1,5 +1,5 @@
 # apiVersion: extensions/v1beta1 If you use google cloud not miinikube
-# I have added to fetch the context
+# I have added the reason as well
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
