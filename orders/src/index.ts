@@ -7,7 +7,7 @@ import {ExpirationCompleteListener} from './events/listeners/expiration-complete
 
 import {PaymentCreatedListener} from './events/listeners/payment-created-listener';
 
-//All is created
+
 const start = async () => {
   console.log('Order service is starting.....');
   if (!process.env.JWT_KEY) {
