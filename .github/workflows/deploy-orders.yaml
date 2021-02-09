@@ -1,0 +1,29 @@
+name: deploy-orders
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'orders/**'
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd orders && docker build -t bharatrose1/orders .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env: 
+            DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+            DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      - run: docker push bharatrose1/orders
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          product_id: ${{secrets.GCP_PROJECT_ID}}
+          service_account_key: ${{ secrets.GCP_SA_KEY }} 
+          export_default_credentials : true
+      - name: User gcloud CLI
+        run: gcloud info
