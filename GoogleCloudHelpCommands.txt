@@ -15,7 +15,7 @@ https://cloud.google.com/sdk/docs/install
 // You should be able to see the your cluster in docker local machine 
 // When you click to the context 
 
-gcloud container clusters get-credentials ticketing-dev
+gcloud container clusters get-credentials cluster-1
 
 // Update the host file with the next load balancing ip address 
 Update our host file again to poing to the remote cluster 
