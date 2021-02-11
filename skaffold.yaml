@@ -57,4 +57,12 @@ build:
           manual:
             - src: 'src/**/*.ts'
               dest: .
+      - image: bharatrose1/emails
+        context: emails
+        docker:
+          dockerfile: Dockerfile
+        sync:
+          manual:
+            - src: 'src/**/*.ts'
+              dest: .
       
