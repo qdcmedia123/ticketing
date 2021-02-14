@@ -29,6 +29,20 @@ spec:
                 secretKeyRef:
                   name: stripe-secret
                   key: STRIPE_KEY
+            - name: NODE_MAILER_HOST
+              value: smtp.mailtrap.io
+            - name: NODE_MAILER_PORT
+              value: '2525'
+            - name: NODE_MAILER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: nodemailer-user
+                  key: NODEMAILER_USER
+            - name: NODE_MAILER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nodemailer-password
+                  key: NODEMAILER_PASSWORD
 ---
 apiVersion: v1
 kind: Service

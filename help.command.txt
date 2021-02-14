@@ -71,3 +71,9 @@ kubectl config use-context <context_name>
 
 // Some changes 
 kubectl config delete-context my-cluster-context
+
+
+// Node mailer 
+kubectl create secret generic nodemailer-user --from-literal NODEMAILER_USER=5038838219a209
+
+kubectl create secret generic nodemailer-password --from-literal NODEMAILER_PASSWORD=99342f2234fd44
