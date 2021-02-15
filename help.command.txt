@@ -29,8 +29,8 @@ http://localhost:8222/streaming/channelsz?subs=1
 
 
 #login to mongo directly 
-kubectl exec -it orders-mongo-depl-6bdb6cd94-hrfg4 mongo
-
+kubectl exec -it orders-mongo-depl-58d676dc64-f67bc
+kubectl exec -it orders-mongo-depl-58d676dc64-f67bc  -- /bin/bash
 #get context 
 kubectl config get-contexts
 
