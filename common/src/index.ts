@@ -26,3 +26,5 @@ export * from './events/order-created-event';
 export * from './events/expiration-completed-event';
 
 export * from './events/payment-created-event';
+
+export * from './events/order-confirmed-email-event';
