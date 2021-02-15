@@ -7,6 +7,8 @@ export enum Subjects {
 
     ExpirationComplete = 'expiration:complete',
 
-    PaymentCreated = 'payment:created'
+    PaymentCreated = 'payment:created',
+
+    OrderConfirmedEmailCreated = 'order-confirmed-email:created'
 }
 
